@@ -5,6 +5,7 @@ import org.junit.Assert.*
 import org.junit.Before
 
 import org.junit.Test
+import java.lang.Exception
 
 class HelperTest {
 
@@ -14,7 +15,7 @@ class HelperTest {
     @Before
     fun setup(){
         helper = Helper()
-        println("Before every testcase")
+        println("Initializing helper...")
     }
     @Test
     fun isPalindrome() {
@@ -35,6 +36,31 @@ class HelperTest {
 
     @After
     fun tearDown(){
-        println("After every testcase")
+        println("Executed Successfully...")
+
+    }
+
+    @Test(expected = Exception::class)
+    fun validatePassword() {
+        val input_password = "joon"
+        val password: String
+        try {
+            password = helper.validatePassword(input_password)
+            if(password!=input_password){
+                fail()
+            }
+        }catch (e:Exception){
+            throw e
+        }
+        println(password)
+
+    }
+
+    @Test
+    fun reverseString() {
+        var expected = "abhiram"
+        var actual = helper.reverseString(expected)
+        println("Reversed String value: $actual")
+        assertEquals(expected.reversed(),actual)
     }
 }
